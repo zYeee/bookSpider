@@ -8,3 +8,4 @@ class BookItem(Item):
     auther = Field()
     tag = Field()
     url = Field()
+    category = Field()

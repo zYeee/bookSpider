@@ -14,6 +14,7 @@ BOT_NAME = 'book'
 SPIDER_MODULES = ['book.spiders']
 NEWSPIDER_MODULE = 'book.spiders'
 DOWNLOAD_HANDLERS = {'s3': None, }
+LOG_LEVEL = 'WARNING'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -62,9 +63,9 @@ DOWNLOAD_HANDLERS = {'s3': None, }
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'book.pipelines.SomePipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'book.pipelines.BookPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
