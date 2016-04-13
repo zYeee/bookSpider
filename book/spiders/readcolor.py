@@ -1,4 +1,6 @@
-import scrapy
+# -*- coding: utf-8 -*-
+
+import scrapy, sys
 from scrapy.selector import Selector
 from book.items import BookItem
 
@@ -23,6 +25,9 @@ class Readcolor(scrapy.spiders.Spider):
                                  self.parse_content(response, category_name))
 
     def parse_content(self, response, category_name):
+        reload(sys)
+        sys.setdefaultencoding('utf-8')
+
         sel = Selector(response)
         sites = sel.xpath("//div[@class='span4']")
 
@@ -35,9 +40,9 @@ class Readcolor(scrapy.spiders.Spider):
                 "a/div/div/ul[@class='unstyled']/li/text()").extract()
             for index, info in enumerate(infos):
                 if(index == 0):
-                    item['auther'] = info
+                    item['auther'] = info.replace('作者: ', '')
                 if(index == 1):
-                    item['tag'] = info
+                    item['tag'] = info.replace('标签: ', '')
             yield item
 
         page = sel.xpath("//div[@class='pagination']")
